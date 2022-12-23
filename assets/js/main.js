@@ -116,6 +116,8 @@
     //=====
 })(jQuery);
 
+//===== кнопка показа работ
+
 function showMoreWorks() {
     const workItems = document.querySelectorAll('.works-item');
     const showMoreBlock = document.querySelector('.work-more');
@@ -161,3 +163,73 @@ function showMoreWorks() {
     });
 }
 showMoreWorks();
+
+//===== отправка запроса на телеграмм
+
+const token = '5658438670:AAHrUrT3idqFud65fAaBXcMslFRgvvDKk2I';
+const chatId = '-1001746616879';
+const URI_API = `https://api.telegram.org/bot${token}/sendMessage`;
+
+const formElems = {
+    inputs: document.querySelectorAll('input'),
+    messageInput: document.querySelectorAll('[name="message"]'),
+    contactsInput: document.querySelectorAll('[name="contacts"]'),
+};
+
+const mainBtn = document.querySelector('[type="submit"]');
+
+const clearInputs = () => {
+    formElems.inputs.forEach(item => {
+        item.value = '';
+    });
+    formElems.messageInput.forEach(item => {
+        item.value = '';
+    });
+    formElems.contactsInput.forEach(item => {
+        item.value = '';
+    });
+};
+
+const thanksText = () => {
+    mainBtn.innerText = 'Спасибо за обращение!';
+    console.log(mainBtn);
+    setTimeout(() => {
+        mainBtn.innerText = 'Отправить сообщение';
+    }, 1500);
+};
+
+const errorText = () => {
+    mainBtn.innerText = 'Попробуйте еще разок';
+    console.log(mainBtn);
+    setTimeout(() => {
+        mainBtn.innerText = 'Отправить сообщение';
+    }, 3000);
+};
+
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let message = `<b>Заявка с сайта-портфолио</b>\n`;
+    message += `<b>Отправитель:</b>${this.name.value}\n`;
+    message += `<b>Почта:</b>${this.email.value}\n`;
+    message += `<b>Соцсети:</b>${this.contacts.value}\n`;
+    message += `<b>Текст сообщения:</b>${this.message.value}`;
+    console.log(message);
+
+    axios
+        .post(URI_API, {
+            chat_id: chatId,
+            parse_mode: 'html',
+            text: message,
+        })
+        .then(function (response) {
+            if (response.status === 200) {
+                console.log(200);
+                clearInputs();
+                thanksText();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            errorText();
+        });
+});
