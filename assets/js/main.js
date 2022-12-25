@@ -226,6 +226,11 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
                 console.log(200);
                 clearInputs();
                 thanksText();
+                document.querySelector('.alert').style.display = 'block';
+                document.querySelector('.alert').style.position = 'absolute';
+                setTimeout(() => {
+                    document.querySelector('.alert').style.display = 'none';
+                }, 2000);
             }
         })
         .catch(function (error) {
@@ -233,3 +238,5 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
             errorText();
         });
 });
+
+//===== маска инпута для текста

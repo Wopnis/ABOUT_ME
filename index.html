@@ -639,22 +639,26 @@
                         <div class="contact-form pt-30">
                             <form id="contact-form" action="#">
                                 <div class="single-form">
-                                    <input type="text" name="name" placeholder="Имя">
+                                    <input type="text" name="name" placeholder="Имя" required>
                                 </div> <!-- single form -->
                                 <div class="single-form">
                                     <input type="email" name="email"
-                                           placeholder="Email">
+                                           placeholder="Email" required>
                                 </div> <!-- single form -->
                                 <div class="single-form">
                                     <textarea name="contacts"
-                                              placeholder="Контакты в соцсетях(Telegram?)"></textarea>
+                                              placeholder="Контакты (Телефон,соцсети (лучше всего Telegram))"
+                                              required></textarea>
                                 </div> <!-- single form -->
                                 <div class="single-form">
-                                    <textarea name="message" placeholder="Сообщение"></textarea>
+                                    <textarea name="message" placeholder="Сообщение"
+                                              required></textarea>
+                                    <div class="alert alert-success" role="alert"
+                                         style="display: none;"> Ваше сообщение отправлено! </div>
                                 </div> <!-- single form -->
                                 <p class="form-message"></p>
                                 <div class="single-form">
-                                    <button class="main-btn" type="submit">Отправить
+                                    <button class="main-btn mt-30" type="submit">Отправить
                                         сообщение</button>
                                 </div> <!-- single form -->
                             </form>
@@ -719,9 +723,7 @@
         <!--====== BACK TOP TOP PART ENDS ======-->
     </div>
     <!--====== THANKS PART START ======-->
-    <div class="thanks-block">
-        <div class="thanks-text">Спасибо за сообщение. Я с Вами свяжусь!</div>
-    </div>
+    <!-- <div class="alert alert-success" role="alert"> A simple success alert—check it out! </div> -->
     <!--====== THANKS PART END ======-->
     <!--====== jquery js ======-->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -743,6 +745,8 @@
     <script src="assets/js/jquery.easing.min.js"></script>
     <!--====== Axios js ======-->
     <script src="assets/js/axios.min.js"></script>
+    <!--====== Mask js ======-->
+    <script src="assets/js/jquery.maskedinput.min.js"></script>
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
 </body>
